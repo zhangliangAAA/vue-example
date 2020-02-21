@@ -15,20 +15,27 @@ MyPlugin.install = function(Vue, options) {
   }
 
   // 2. 添加全局资源
+  // 2.1指令
   Vue.directive('my-directive', {
     bind (el, binding, vnode, oldVnode) {
       // 逻辑...
       console.log('MyPlugin-添加全局资源-directive')
     }
   })
+  // 2.2大写
+  Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  })
 
   // 3. 注入组件选项
-  // Vue.mixin({
-  //   created: function () {
-  //     // 逻辑...
-  //     console.log('MyPlugin-注入组件选项-created')
-  //   }
-  // })
+  Vue.mixin({
+    created: function () {
+      // 逻辑...
+      // console.log('MyPlugin-注入组件选项-created')
+    }
+  })
 
   // 4. 添加实例方法
   Vue.prototype.$myMethod = function (methodOptions) {

@@ -76,6 +76,16 @@ const routes = [
     }]
   },
   {
+    path: '/plugins',
+    name: '插件',
+    component: Layout,
+    children:[{
+      path: 'plugin',
+      name: '插件1',
+      component: () => import('@/views/Plugins/index.vue'),
+    }]
+  },
+  {
     path: '/mixin',
     name:'mixin',
     component: Layout,

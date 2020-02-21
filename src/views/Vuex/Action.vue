@@ -47,7 +47,9 @@ export default {
       })
     },
     setCount(){
-      this.$store.dispatch('setCount',10)
+
+      // this.$store.dispatch('setCount',10) // 调用actions
+      this.$store.commit('changeCount',11)  // 调用mutations
     }
   }
 }
