@@ -48,7 +48,7 @@ module.exports = {
 	// corsUseCredentials: false,
 	// webpack 配置，键值对象时会合并配置，为方法时会改写配置
 	// https://cli.vuejs.org/guide/webpack.html#simple-configuration
-	configureWebpack: config => {
+	configureWebpack: (config) => {
 		if (process.env.NODE_ENV === 'production') {
 			console.log('使用生产环境的配置', config);
 		} else {
@@ -58,12 +58,15 @@ module.exports = {
 
 	// webpack 链接 API，用于生成和修改 webapck 配置
 	// https://github.com/mozilla-neutrino/webpack-chain
-	chainWebpack: config => {
+	chainWebpack: (config) => {
 		// 因为是多页面，所以取消 chunks，每个页面只对应一个单独的 JS / CSS
 		config.optimization.splitChunks({
 			cacheGroups: {},
 		});
-
+		// 添加plugin
+		config
+			.plugin('webpack-bundle-analyzer')
+			.use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
 		// 'src/lib' 目录下为外部库文件，不参与 eslint 检测
 		config.module
 			.rule('eslint')
